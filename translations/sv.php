@@ -3,13 +3,13 @@
 $timeAgoStrings = array(
   'aboutOneDay' => "ca en dag sedan",
   'aboutOneHour' => "ca en timme sedan",
-  'aboutOneMonth' => "ca en månad sedan",
-  'aboutOneYear' => "ca ett år sedan",
+  'aboutOneMonth' => "ca en mÃ¥nad sedan",
+  'aboutOneYear' => "ca ett Ã¥r sedan",
   'days' => "%s dagar sedan",
   'hours' => "%s timmar sedan",
-  'lessThanAMinute' => "mindre än en minut sedan",
+  'lessThanAMinute' => "mindre Ã¤n en minut sedan",
   'lessThanOneHour' => "%s minuter sedan",
-  'months' => "%s månader sedan",
+  'months' => "%s mÃ¥nader sedan",
   'oneMinute' => "en minut sedan",
-  'years' => "över %s år sedan"
+  'years' => "Ã¶ver %s Ã¥r sedan"
 );
