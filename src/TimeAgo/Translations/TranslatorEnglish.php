@@ -2,60 +2,60 @@
 
 namespace TimeAgo\Translations;
 
-class TranslatorSwedish implements TranslatorInterface
+class TranslatorEnglish
 {
     public function getAboutOneDayString()
     {
-        return "ca en dag sedan";
+        return "1 day ago";
     }
 
     public function getAboutOneHourString()
     {
-        return "ca en timme sedan";
+        return "about 1 hour ago";
     }
 
     public function getAboutOneMonthString()
     {
-        return "ca en månad sedan";
+        return "about 1 month ago";
     }
 
     public function getAboutOneYearString()
     {
-        return "ca ett år sedan";
+        return "about 1 year ago";
     }
 
     public function getDaysString($days)
     {
-        return "$days dagar sedan";
+        return "$days days ago";
     }
 
     public function getHoursString($hours)
     {
-        return "$hours timmar sedan";
+        return "$hours hours ago";
     }
 
     public function getLessThanAMinuteString()
     {
-        return "mindre än en minut sedan";
+        return "less than a minute ago";
     }
 
     public function getLessThanOneHourString($mintues)
     {
-        return "%s minuter sedan";
+        return "$mintues minutes ago";
     }
 
     public function getMonthsString($months)
     {
-        return "$months månader sedan";
+        return "$months months ago";
     }
 
     public function getOneMinuteString()
     {
-        return "en minut sedan";
+        return "1 minute ago";
     }
 
     public function getYearsString($years)
     {
-        return "över $years år sedan";
+        return "over $years years ago";
     }
 }
