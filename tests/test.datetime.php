@@ -1,7 +1,6 @@
 <?php
 
-require('../westsworld.datetime.class.php');
-require('../timeago.inc.php');
+use TimeAgo\TimeAgo;
 
 echo "<h1>TimeAgo class tests!</h1>";
 echo "<p>";
@@ -120,50 +119,6 @@ echo "<p>";
   print_r($timeAgo->dateDifference("2010/4/01 00:00:00","2010/5/12 03:05:30"));
   echo "</pre>";
 echo "</p>";
-
-
-echo "<h1>WWDateTime class tests!</h1>";
-
-function test_time($timeAgo, $timeAsItShouldBe) {
-  echo "<p>";
-  $datetime = new WWDateTime($timeAgo);
-  echo $datetime->format(DATE_RFC3339);
-  echo " = ";
-  echo $datetime->timeAgoInWords();
-  echo " === ";
-  echo $timeAsItShouldBe;
-  echo "</p>";
-}
-
-test_time("-2 year", "over 2 years");
-timeAgoInWords("-2 year");
-test_time("-1 year", "about 1 year");
-timeAgoInWords("-1 year");
-test_time("-1 month", "about 1 month");
-timeAgoInWords("-1 month");
-test_time("-2 month", "about 2 months");
-timeAgoInWords("-2 month");
-test_time("-1 day", "1 day");
-timeAgoInWords("-1 day");
-test_time("-2 day", "2 days");
-timeAgoInWords("-2 day");
-test_time("-1 hour", "about 1 hour");
-timeAgoInWords("-1 hour");
-test_time("-2 hour", "about 2 hours");
-timeAgoInWords("-2 hour");
-test_time("-1 minute", "about 1 minute");
-timeAgoInWords("-1 minute");
-test_time("-2 minute", "about 2 minutes");
-timeAgoInWords("-2 minute");
-test_time("-44 minute", "about 44 minutes");
-timeAgoInWords("-44 minute");
-test_time("-45 minute", "about 1 hour");
-timeAgoInWords("-45 minute");
-test_time("-1 second", "less than a minute");
-timeAgoInWords("-1 second");
-test_time("-31 second", "1 minute");
-timeAgoInWords("-31 second");
-
 
 echo "<h2>Language testing</h2>";
 echo "<p>";
