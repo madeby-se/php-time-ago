@@ -284,7 +284,7 @@ class TimeAgo {
   private function _translate($label, $time = '') {
     $string = self::$timeAgoStrings[$label];
     if ($this->encoding != 'UTF-8') {
-      $string = mb_convert_encoding($string, $this->encoding, 'UTF-8');
+      $string = iconv('UTF-8', $this->encoding, $string);
     }
     return sprintf($string, $time);
   }
