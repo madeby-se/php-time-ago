@@ -27,12 +27,13 @@ class TimeAgo {
   private $secondsPerMonth = 2592000;
   private $secondsPerYear = 31104000;
   private $timezone;
+  private $encoding;
 
   // translations variables
   private static $language;
   private static $timeAgoStrings = NULL;
   
-  public function __construct($timezone = NULL, $language = 'en') {
+  public function __construct($timezone = NULL, $language = 'en', $encoding = 'UTF-8') {
     // if the $timezone is null, we take 'Europe/London' as the default
     // this was done, because the parent construct tossed an exception
     if($timezone == NULL) {
@@ -281,7 +282,11 @@ class TimeAgo {
    * @return string the translated label text including the time.
    */
   private function _translate($label, $time = '') {
-    return sprintf(self::$timeAgoStrings[$label], $time);
+    $string = self::$timeAgoStrings[$label];
+    if ($this->encoding != 'UTF-8') {
+      $string = mb_convert_encoding($string, $this->encoding, 'UTF-8');
+    }
+    return sprintf($string, $time);
   }
 
   /**
