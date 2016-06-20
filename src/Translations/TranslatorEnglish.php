@@ -6,7 +6,7 @@ class TranslatorEnglish
 {
     public function getAboutOneDayString()
     {
-        return "1 day ago";
+        return "about 1 day ago";
     }
 
     public function getAboutOneHourString()

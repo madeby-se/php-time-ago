@@ -26,10 +26,8 @@ class TimeAgo
     private $secondsPerYear = 31104000;
     private $timezone;
     private $encoding;
+    private $language;
 
-    // translations variables
-    private static $language;
-    private static $timeAgoStrings = null;
     /** @var Translations\TranslatorInterface */
     private $translator;
 
@@ -40,11 +38,13 @@ class TimeAgo
         if ($timezone == null) {
             $timezone = 'Europe/Copenhagen';
         }
-
-        // loads the translation files
-        $this->_loadTranslations($language);
         // storing the current timezone
         $this->timezone = $timezone;
+
+        // loads the translator
+        $this->language = $language;
+        $this->requireTranslation();
+
     }
 
     public function inWords($past, $now = "now")
@@ -215,89 +215,6 @@ class TimeAgo
         return $timeAgo;
     }
 
-    public function dateDifference($past, $now = "now")
-    {
-        // initializes the placeholders for the different "times"
-        $seconds = 0;
-        $minutes = 0;
-        $hours = 0;
-        $days = 0;
-        $months = 0;
-        $years = 0;
-
-        // sets the default timezone
-        date_default_timezone_set($this->timezone);
-
-        // finds the past in datetime
-        $past = strtotime($past);
-        // finds the current datetime
-        $now = strtotime($now);
-
-        // calculates the difference
-        $timeDifference = $now - $past;
-
-        // starts determining the time difference
-        if ($timeDifference >= 0) {
-
-            // finds the number of years
-            if ($timeDifference >= $this->secondsPerYear) {
-                // uses floor to remove decimals
-                $years = floor($timeDifference / $this->secondsPerYear);
-                // saves the amount of seconds left
-                $timeDifference = $timeDifference - ($years * $this->secondsPerYear);
-            }
-
-            // finds the number of months
-            if ($timeDifference >= $this->secondsPerMonth && $timeDifference <= ($this->secondsPerYear - 1)) {
-                // uses floor to remove decimals
-                $months = floor($timeDifference / $this->secondsPerMonth);
-                // saves the amount of seconds left
-                $timeDifference = $timeDifference - ($months * $this->secondsPerMonth);
-            }
-
-            // finds the number of days
-            if ($timeDifference >= $this->secondsPerDay && $timeDifference <= ($this->secondsPerYear - 1)) {
-                // uses floor to remove decimals
-                $days = floor($timeDifference / $this->secondsPerDay);
-                // saves the amount of seconds left
-                $timeDifference = $timeDifference - ($days * $this->secondsPerDay);
-            }
-
-            // finds the number of hours
-            if ($timeDifference >= $this->secondsPerHour && $timeDifference <= ($this->secondsPerDay - 1)) {
-                // uses floor to remove decimals
-                $hours = floor($timeDifference / $this->secondsPerHour);
-                // saves the amount of seconds left
-                $timeDifference = $timeDifference - ($hours * $this->secondsPerHour);
-            }
-
-            // finds the number of minutes
-            if ($timeDifference >= $this->secondsPerMinute && $timeDifference <= ($this->secondsPerHour - 1)) {
-                // uses floor to remove decimals
-                $minutes = floor($timeDifference / $this->secondsPerMinute);
-                // saves the amount of seconds left
-                $timeDifference = $timeDifference - ($minutes * $this->secondsPerMinute);
-            }
-
-            // finds the number of seconds
-            if ($timeDifference <= ($this->secondsPerMinute - 1)) {
-                // seconds is just what there is in the timeDifference variable
-                $seconds = $timeDifference;
-            }
-        }
-
-        $difference = array(
-            "years" => $years,
-            "months" => $months,
-            "days" => $days,
-            "hours" => $hours,
-            "minutes" => $minutes,
-            "seconds" => $seconds
-        );
-
-        return $difference;
-    }
-
     /**
      * Convert string to new encoding if other then UTF-8 is used
      * @param $string
@@ -314,17 +231,10 @@ class TimeAgo
 
     /**
      * Loads the translations into the system.
-     * @param string $language
      */
-    private function _loadTranslations($language)
+    private function requireTranslation()
     {
-        // no time strings loaded? load them and store it all in static variables
-        if (self::$timeAgoStrings == null || self::$language != $language) {
-            $gateway = new TranslatorGateway();
-            $this->translator = $gateway->requireTranslationByLanguageCode($language);
-        }
-
-        // storing the language
-        self::$language = $language;
+        $gateway = new TranslatorGateway();
+        $this->translator = $gateway->requireTranslationByLanguageCode($this->language);
     }
 }
