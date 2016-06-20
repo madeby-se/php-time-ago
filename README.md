@@ -71,16 +71,6 @@ Examples using Windows-1252 translation:
     $timeAgo = new TimeAgo($timeZone, 'sv', 'Windows-1252');
     echo $timeAgo->inWords("2010/1/10 23:05:00");
 
-
-
-Try pandoc!
-
-pandoc --from textile --to markdown
-
-  from
-
-to
-
 Changes (versions)
 ==================
 
@@ -131,7 +121,3 @@ FROM,\
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN\
 THE SOFTWARE.
-
-pandoc 1.17.1
-
-© 2013–2015 John MacFarlane
